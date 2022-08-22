@@ -29,6 +29,7 @@ class SignUpScreen extends StatelessWidget {
     log('Password: ${passwordController.text}');
 
     // Save to local storage
+    userEmail = emailController.text;
     CacheHelper.saveData(
       key: 'userEmail',
       value: emailController.text,

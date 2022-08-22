@@ -1,5 +1,7 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
 import '../../network/end_points.dart';
 import '../../network/models/sign_up_model.dart';
 import '../../network/remote/dio_helper.dart';

@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
+import 'business_logic/bloc_exports.dart';
 import 'network/local/cache_helper.dart';
+import 'network/remote/dio_helper.dart';
 import 'shared/components/methods/default_screen.dart';
 import 'shared/services/locator.dart';
 import 'shared/styles/my_theme.dart';
-import 'package:flutter/material.dart';
-import 'business_logic/bloc_exports.dart';
-import 'network/remote/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

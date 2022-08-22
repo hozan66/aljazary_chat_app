@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../network/local/cache_helper.dart';
+import '../constants/default_values.dart';
 
 void navigateTo(context, widget) => Navigator.push(
       context,
@@ -56,6 +57,7 @@ Color chooseToastColor(ToastStates state) {
 }
 
 void signOut(context) {
+  userEmail = null;
   CacheHelper.removeData(key: 'userEmail');
 
   CacheHelper.removeData(key: 'token').then((value) {

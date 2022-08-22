@@ -17,14 +17,14 @@ class ChatRoomCubit extends Cubit<ChatRoomState> {
   static ChatRoomCubit get(context) => BlocProvider.of(context);
 
   // Get Data
-  // List<UserChatDataModel> chatList = [];
-  void getChatsAPI({required String roomChat}) {
+  List<UserChatDataModel> newChatList = [];
+  Future<void> getChatsAPI({required String roomChat}) async {
     DioHelper.getData(
       url: '$getChatsEndpoint/$roomChat',
     ).then((value) {
       emit(ChatRoomLoadingState());
 
-      List<UserChatDataModel> newChatList = [];
+      // List<UserChatDataModel> newChatList = [];
 
       // log('getChatsAPI Success=${value.data.toString()}');
       var response = value.data;
@@ -274,18 +274,16 @@ class ChatRoomCubit extends Cubit<ChatRoomState> {
     List<UserChatDataModel> oldChatList = state.chatList;
     List<UserChatDataModel> newChatList = [];
 
-    List<Map<String, dynamic>> chatListJson = [];
     for (var model in oldChatList) {
       if (model.id == id) {
         continue;
       }
       newChatList.add(model);
-      chatListJson.addAll({model.toJson()});
     }
 
     Map<String, dynamic> json = {
       'room': roomChat,
-      'data': chatListJson,
+      // 'data': chatListJson,
     };
 
     SocketHelper.sendDeletedMessage(json);
@@ -295,17 +293,10 @@ class ChatRoomCubit extends Cubit<ChatRoomState> {
     log('=========================================');
   }
 
-  void receiveDeletedMessageSocket(Map<String, dynamic> json) {
+  void receiveDeletedMessageSocket(Map<String, dynamic> json) async {
     try {
       log('=>=>=>receiveDeletedMessageSocket=>=>=>=>=>');
-
-      List<UserChatDataModel> newChatList = [];
-      for (var element in json['data']) {
-        newChatList.add(UserChatDataModel.fromJson(element));
-      }
-
-      // final state = this.state;
-      // List<UserChatDataModel> newChatList = state.chatList;
+      await getChatsAPI(roomChat: json['room']);
 
       emit(ChatRoomSuccessState(chatList: newChatList));
     } catch (e) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'chat_card.dart';
 import 'default_loading_indicator.dart';
 import 'filled_outline_button.dart';
@@ -63,13 +65,22 @@ class AllChatsBody extends StatelessWidget {
                     return ChatCard(
                       chat: chat,
                       press: () {
+                        // ==================
+                        List<String> roomChatNames = [
+                          userEmail ?? 'userEmail',
+                          cubit.users[index].email
+                        ];
+                        roomChatNames.sort();
+
+                        String roomChatName = roomChatNames.join('--with--');
+                        log(roomChatName);
+
+                        // ==================
                         navigateTo(
                             context,
                             ChatRoomScreen(
-                              roomChat:
-                                  '$userEmail--with--${cubit.users[index].email}',
-                              // 'ali@gmail.com--with--${cubit.users[index].email}',
-                              sender: userEmail, //userEmail,
+                              roomChat: roomChatName,
+                              sender: userEmail ?? 'userEmail', //userEmail,
                               receiver: cubit.users[index].email,
                             ));
                       },

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:aljazary_chat_app/shared/constants/default_values.dart';
+import '../../shared/constants/default_values.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../network/end_points.dart';

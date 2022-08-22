@@ -1,14 +1,14 @@
 import 'dart:developer';
 
-import '../../business_logic/chat_room_cubit/chat_room_cubit.dart';
-import '../screens/edit_message/edit_message_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
+
+import '../../business_logic/chat_room_cubit/chat_room_cubit.dart';
 import '../../network/models/user_chat_model.dart';
 import '../../shared/constants/default_values.dart';
 import '../../shared/styles/my_colors.dart';
-
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
+import '../screens/edit_message/edit_message_screen.dart';
 
 class Message extends StatelessWidget {
   final UserChatDataModel model;
